@@ -20,7 +20,8 @@ import {
     AutocompleteArrayInput,
     useNotify,
     useRefresh,
-    useRedirect
+    useRedirect,
+    ArrayField,
 } from 'react-admin';
 
 const complexOfServicesFilters = [
@@ -32,22 +33,22 @@ const complexOfServicesFilters = [
 
 export const ComplexOfServicesList = props => {
     
-    const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-    // const { data: medicalPersonnels } = useQuery({
-    //     type:'getList',
-    //     resource: 'medical-personnel',
-    //     payload: {
-    //         pagination: { page: 1, perPage: 600 },
-    //         sort: { field: 'firstName', order: 'ASC' },
-    //         filter: {},
-    //       },
-    // })
+    const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));    
+    const [complexOfServicesIds, setComplexOfServices] = useState([]);
+    const { data: complexOfServicesChoices } = useQuery({
+        type:'getList',
+        resource: 'complex-of-services',
+        payload: {
+            pagination: { page: 1, perPage: 600 },
+            sort: { field: 'description', order: 'ASC' },
+            filter: {},
+          },
+    })
 
-    // if (medicalPersonnels){
-    //     const medicalPersonnelsIds = medicalPersonnels.map((item) => item['id']);
-    //     console.log(medicalPersonnelsIds)
-    // }
-
+    useEffect(() => {        
+        if(complexOfServicesChoices) setComplexOfServices(complexOfServicesChoices.map((item) => item.catalogueOfServices.map((childCatalogue) => childCatalogue.id)))
+    }, [complexOfServicesChoices])
+    
     return (<List {...props} filters={complexOfServicesFilters}>
         {isSmall ? (
             <SimpleList
@@ -59,11 +60,11 @@ export const ComplexOfServicesList = props => {
             <NumberField source="id" />
             <TextField source="description" />
             <TextField source="totalCost" />
-            {/* <ReferenceArrayField label="Medical personnel" reference="medical-personnel" source="">
-                <SingleFieldList>
-                    <ChipField source="firstName" />
-                </SingleFieldList>
-            </ReferenceArrayField> */}
+            {/* <ArrayField source="catalogueOfServices" fieldKey="id">
+                <Datagrid>
+                 <TextField source="serviceDescription" />
+                </Datagrid>
+            </ArrayField> */}
             <EditButton />
         </Datagrid>
         )}

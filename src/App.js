@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, Resource, ShowGuesser } from 'react-admin';
+import { Admin, Resource, ShowGuesser, AppBar } from 'react-admin';
 import crudProvider from 'ra-data-nestjsx-crud'
 import { PatientsList, PatientsEdit, PatientsCreate } from "./components/patients";
 import { BrigadeMedicalPersonnelList, BrigadeMedicalPersonnelEdit, BrigadeMedicalPersonnelCreate } from './components/brigade-medical-personnel';
@@ -13,10 +13,11 @@ import { CatalogueOfServicesList, CatalogueOfServicesEdit, CatalogueOfServicesCr
 import { ComplexOfServicesList, ComplexOfServicesCreate, ComplexOfServicesEdit } from './components/complex-of-services';
 import { DepartmentsList, DepartmentsCreate, DepartmentsEdit } from "./components/departments";
 import { MedicalPersonnelList, MedicalPersonnelEdit, MedicalPersonnelCreate } from './components/medical-personnel';
+import { CustomLayout } from "./components/layout/layout";
 
 const dataProvider = crudProvider('http://localhost:3000');
 const App = () => (
-    <Admin dataProvider={dataProvider}>
+    <Admin layout={CustomLayout} dataProvider={dataProvider}>
       <Resource name="patients" list={PatientsList} show={ShowGuesser} edit={PatientsEdit} create={PatientsCreate}/>
       <Resource name="brigade-medical-personnel" list={BrigadeMedicalPersonnelList} show={ShowGuesser} edit={BrigadeMedicalPersonnelEdit} create={BrigadeMedicalPersonnelCreate}/>
       <Resource name="register-of-cards" list={RegisterOfCardsList} show={ShowGuesser} create={RegisterOfCardsCreate} edit={RegisterOfCardsEdit} />
@@ -28,7 +29,7 @@ const App = () => (
       <Resource name="medical-personnel" list={MedicalPersonnelList} show={ShowGuesser} edit={MedicalPersonnelEdit} create={MedicalPersonnelCreate}/>
       <Resource name="departments" list={DepartmentsList} show={ShowGuesser} edit={DepartmentsEdit} create={DepartmentsCreate}/>
       <Resource name="complains-suggestions" list={ComplainsSuggestionsList} show={ShowGuesser} edit={ComplainsSuggestionsEdit} create={ComplainsSuggestionsCreate}/>
-      <Resource name="news" list={NewsList} show={ShowGuesser} edit={NewsEdit} create={NewsCreate} />
+      <Resource name="news" list={NewsList} show={ShowGuesser} edit={NewsEdit} create={NewsCreate} /> 
     </Admin>
   );
 

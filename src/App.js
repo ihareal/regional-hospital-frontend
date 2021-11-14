@@ -14,10 +14,11 @@ import { ComplexOfServicesList, ComplexOfServicesCreate, ComplexOfServicesEdit }
 import { DepartmentsList, DepartmentsCreate, DepartmentsEdit } from "./components/departments";
 import { MedicalPersonnelList, MedicalPersonnelEdit, MedicalPersonnelCreate } from './components/medical-personnel';
 import { CustomLayout } from "./components/layout/layout";
+import { CustomTheme } from './components/theme/theme';
 
 const dataProvider = crudProvider('http://localhost:3000');
 const App = () => (
-    <Admin layout={CustomLayout} dataProvider={dataProvider}>
+    <Admin theme={CustomTheme} layout={CustomLayout} dataProvider={dataProvider}>
       <Resource name="patients" list={PatientsList} show={ShowGuesser} edit={PatientsEdit} create={PatientsCreate}/>
       <Resource name="brigade-medical-personnel" list={BrigadeMedicalPersonnelList} show={ShowGuesser} edit={BrigadeMedicalPersonnelEdit} create={BrigadeMedicalPersonnelCreate}/>
       <Resource name="register-of-cards" list={RegisterOfCardsList} show={ShowGuesser} create={RegisterOfCardsCreate} edit={RegisterOfCardsEdit} />

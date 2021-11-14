@@ -20,7 +20,8 @@ import {
     AutocompleteArrayInput,
     useNotify,
     useRefresh,
-    useRedirect
+    useRedirect,
+    ReferenceField
 } from 'react-admin';
 
 const catalogueOfServicesFilters = [
@@ -63,7 +64,7 @@ export const CatalogueOfServicesList = props => {
                 <SingleFieldList>
                     <ChipField source="firstName" />
                 </SingleFieldList>
-            </ReferenceArrayField> */}
+            </ReferenceArrayField> */}            
             <EditButton />
         </Datagrid>
         )}

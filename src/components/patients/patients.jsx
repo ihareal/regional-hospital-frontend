@@ -42,7 +42,7 @@ export const PatientsList = props => {
             <TextField source="surname" />
             <TextField source="lastName" />
             <TextField source="address" />
-            <TextField source="contacts" />
+            <TextField source="phoneNumber" />
             <EditButton />
         </Datagrid>
         )}
@@ -58,7 +58,7 @@ export const PatientsEdit = props => (
             <TextInput source="surname" />
             <TextInput source="lastName" />
             <TextInput source="address" />
-            <TextInput source="contacts" />
+            <TextInput source="phoneNumber" />
         </SimpleForm>
     </Edit>
 )
@@ -95,7 +95,7 @@ export const PatientsCreate = props => {
             <TextInput source="surname" />
             <TextInput source="lastName" />
             <TextInput source="address" />
-            <TextInput source="contacts" />
+            <TextInput source="phoneNumber" />
             <AutocompleteArrayInput 
             parse={value =>
                 value && value.map(v => ({ id: v }))

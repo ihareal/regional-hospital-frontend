@@ -13,6 +13,7 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
+    ReferenceField
 } from 'react-admin';
 
 const registerOfCardsFilters = [
@@ -38,6 +39,9 @@ export const RegisterOfCardsList = props => {
             <TextField source="surname" />
             <TextField source="lastName" />
             <TextField source="registration" />
+            <ReferenceField source="patientId" reference="patients">
+                <TextField source="firstName" />
+            </ReferenceField>
             <EditButton />
         </Datagrid>
         )}
@@ -53,6 +57,9 @@ export const RegisterOfCardsEdit = props => (
             <TextInput source="surname" />
             <TextInput source="lastName" />
             <TextInput source="registration" />
+            <ReferenceInput source="patientId" reference="patients">
+                <SelectInput optionText="firstName" />
+            </ReferenceInput>
         </SimpleForm>
     </Edit>
 )
@@ -64,6 +71,9 @@ export const RegisterOfCardsCreate = props => (
             <TextInput source="surname" />
             <TextInput source="lastName" />
             <TextInput source="registration" />
+            <ReferenceInput source="patientId" reference="patients">
+                <SelectInput optionText="firstName" />
+            </ReferenceInput>
         </SimpleForm>
     </Create>
 )

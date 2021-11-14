@@ -13,6 +13,8 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
+    useRefresh,
+    useRedirect
 } from 'react-admin';
 
 const complainsSuggestionsFilters = [
@@ -34,7 +36,7 @@ export const ComplainsSuggestionsList = props => {
         ) : (
         <Datagrid rowClick="edit">
             <NumberField source="id" />
-            <TextField source="content" />
+            <TextField source="review" />
             <EditButton />
         </Datagrid>
         )}
@@ -46,15 +48,23 @@ export const ComplainsSuggestionsEdit = props => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="content" />
+            <TextInput source="review" />
         </SimpleForm>
     </Edit>
 )
 
-export const ComplainsSuggestionsCreate = props => (
-    <Create {...props}>
+export const ComplainsSuggestionsCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/complains-suggestions`);
+        refresh();
+    };
+
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>
-            <TextInput source="content" />
+            <TextInput source="review" />
         </SimpleForm>
-    </Create>
-)
+    </Create>)
+}

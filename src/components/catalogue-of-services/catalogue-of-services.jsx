@@ -13,15 +13,10 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
-    ReferenceArrayField,
-    ChipField,
-    SingleFieldList,
     useQuery,
     AutocompleteArrayInput,
-    useNotify,
     useRefresh,
     useRedirect,
-    ReferenceField
 } from 'react-admin';
 
 const catalogueOfServicesFilters = [
@@ -34,20 +29,6 @@ const catalogueOfServicesFilters = [
 export const CatalogueOfServicesList = props => {
     
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-    // const { data: medicalPersonnels } = useQuery({
-    //     type:'getList',
-    //     resource: 'medical-personnel',
-    //     payload: {
-    //         pagination: { page: 1, perPage: 600 },
-    //         sort: { field: 'firstName', order: 'ASC' },
-    //         filter: {},
-    //       },
-    // })
-
-    // if (medicalPersonnels){
-    //     const medicalPersonnelsIds = medicalPersonnels.map((item) => item['id']);
-    //     console.log(medicalPersonnelsIds)
-    // }
 
     return (<List {...props} filters={catalogueOfServicesFilters}>
         {isSmall ? (
@@ -87,10 +68,9 @@ export const CatalogueOfServicesCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/catalogue-of-services?filter=%7B"id"%3A"${data.id}"%7D`);
+        redirect(`/catalogue-of-services`);
         refresh();
-        // notify(`Catalogue of services succesfully created!`);
-  };
+    };
 
     const [medicalPersonnels, setMedicalPersonnels] = useState([]);
     const { data: medicalPersonnelsChoices } = useQuery({

@@ -13,7 +13,9 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
-    ReferenceField
+    ReferenceField,
+    useRefresh,
+    useRedirect,
 } from 'react-admin';
 
 const registerOfCardsFilters = [
@@ -64,8 +66,16 @@ export const RegisterOfCardsEdit = props => (
     </Edit>
 )
 
-export const RegisterOfCardsCreate = props => (
-    <Create {...props}>
+export const RegisterOfCardsCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/register-of-cards`);
+        refresh();
+    };
+
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>
             <TextInput source="firstName" />
             <TextInput source="surname" />
@@ -75,5 +85,4 @@ export const RegisterOfCardsCreate = props => (
                 <SelectInput optionText="firstName" />
             </ReferenceInput>
         </SimpleForm>
-    </Create>
-)
+    </Create>)}

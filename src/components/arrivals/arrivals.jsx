@@ -14,6 +14,8 @@ import {
     SelectInput,
     SimpleList,
     ReferenceField,
+    useRedirect,
+    useRefresh
 } from 'react-admin';
 
 const arrivalFilters = [
@@ -23,7 +25,7 @@ const arrivalFilters = [
     </ReferenceInput>,
 ]
 
-export const ArrivalsList = props => {
+export const ArrivalsList = props => {  
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
     return (<List {...props} filters={arrivalFilters}>
         {isSmall ? (
@@ -62,8 +64,16 @@ export const ArrivalsEdit = props => (
     </Edit>
 )
 
-export const ArrivalsCreate = props => (
-    <Create {...props}>
+export const ArrivalsCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/brigade`);
+        refresh();
+    };
+
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>             
             <TextInput source="reason" />
             <ReferenceInput source="brigadesId" reference="brigade">
@@ -73,5 +83,5 @@ export const ArrivalsCreate = props => (
                 <SelectInput optionText="firstName" />
             </ReferenceInput>  
         </SimpleForm>
-    </Create>
-)
+    </Create>)
+}

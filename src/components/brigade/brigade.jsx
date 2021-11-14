@@ -13,6 +13,8 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
+    useRefresh,
+    useRedirect,
 } from 'react-admin';
 
 const brigadeFilters = [
@@ -51,10 +53,17 @@ export const BrigadeEdit = props => (
     </Edit>
 )
 
-export const BrigadeCreate = props => (
-    <Create {...props}>
+export const BrigadeCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/brigade`);
+        refresh();
+    };
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>
             <TextInput source="nickName" />
         </SimpleForm>
     </Create>
-)
+)}

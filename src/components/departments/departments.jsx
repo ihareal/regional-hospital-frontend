@@ -13,6 +13,8 @@ import {
     SelectInput,
     SimpleList,
     ReferenceField,
+    useRedirect,
+    useRefresh
 } from 'react-admin';
 
 const departmentsFilters = [
@@ -56,8 +58,15 @@ export const DepartmentsEdit = props => (
     </Edit>
 )
 
-export const DepartmentsCreate = props => (
-    <Create {...props}>
+export const DepartmentsCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/departments`);
+        refresh();
+    };
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>             
             <TextInput source="contacts" />
             <TextInput source="description" />
@@ -65,5 +74,5 @@ export const DepartmentsCreate = props => (
                 <SelectInput optionText="firstName" />
             </ReferenceInput>
         </SimpleForm>
-    </Create>
-)
+    </Create>)
+}

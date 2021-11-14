@@ -13,6 +13,8 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
+    useRefresh,
+    useRedirect
 } from 'react-admin';
 
 const newsFilters = [
@@ -51,10 +53,18 @@ export const NewsEdit = props => (
     </Edit>
 )
 
-export const NewsCreate = props => (
-    <Create {...props}>
+export const NewsCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/news`);
+        refresh();
+    };
+
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>
             <TextInput source="content" />
         </SimpleForm>
-    </Create>
-)
+    </Create>)
+}

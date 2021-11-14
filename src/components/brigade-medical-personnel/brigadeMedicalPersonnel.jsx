@@ -14,6 +14,8 @@ import {
     SelectInput,
     SimpleList,
     ReferenceField,
+    useRedirect,
+    useRefresh
 } from 'react-admin';
 
 const brigadeMedicalPersonnelFilters = [
@@ -62,8 +64,16 @@ export const BrigadeMedicalPersonnelEdit = props => (
     </Edit>
 )
 
-export const BrigadeMedicalPersonnelCreate = props => (
-    <Create {...props}>
+export const BrigadeMedicalPersonnelCreate = props => {
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = ({ data }) => {
+        redirect(`/brigade`);
+        refresh();
+    };
+
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>             
             <TextInput source="firstName" />
             <TextInput source="surname" />
@@ -73,5 +83,5 @@ export const BrigadeMedicalPersonnelCreate = props => (
                 <SelectInput optionText="nickName" />
             </ReferenceInput>   
         </SimpleForm>
-    </Create>
-)
+    </Create>)
+}

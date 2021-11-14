@@ -69,7 +69,7 @@ export const PatientsCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/patients?filter=%7B"id"%3A"${data.id}"%7D`);
+        redirect(`/patients`);
         refresh();
         // notify(`Catalogue of services succesfully created!`);
   };
@@ -89,7 +89,7 @@ export const PatientsCreate = props => {
         if(medicalPersonnelsChoices) setMedicalPersonnels(medicalPersonnelsChoices.map((item) => ({ id:item.id, name:item.firstName })))
     }, [medicalPersonnelsChoices])
 
-    return (<Create {...props}>
+    return (<Create onSuccess={onSuccess} {...props}>
         <SimpleForm>
             <TextInput source="firstName" />
             <TextInput source="surname" />

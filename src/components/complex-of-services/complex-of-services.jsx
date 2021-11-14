@@ -87,7 +87,7 @@ export const ComplexOfServicesCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/catalogue-of-services?filter=%7B"id"%3A"${data.id}"%7D`);
+        redirect(`/complex-of-services`);
         refresh();
         // notify(`Catalogue of services succesfully created!`);
   };

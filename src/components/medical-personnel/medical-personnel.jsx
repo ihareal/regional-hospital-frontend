@@ -13,12 +13,8 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleList,
-    ReferenceArrayField,
-    ChipField,
-    SingleFieldList,
     useQuery,
     AutocompleteArrayInput,
-    useNotify,
     useRefresh,
     useRedirect
 } from 'react-admin';
@@ -32,20 +28,6 @@ const medicalPersonnelFilters = [
 
 export const MedicalPersonnelList = props => {
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-    // const { data: medicalPersonnels } = useQuery({
-    //     type:'getList',
-    //     resource: 'medical-personnel',
-    //     payload: {
-    //         pagination: { page: 1, perPage: 600 },
-    //         sort: { field: 'firstName', order: 'ASC' },
-    //         filter: {},
-    //       },
-    // })
-
-    // if (medicalPersonnels){
-    //     const medicalPersonnelsIds = medicalPersonnels.map((item) => item['id']);
-    //     console.log(medicalPersonnelsIds)
-    // }
 
     return (<List {...props} filters={medicalPersonnelFilters}>
         {isSmall ? (
@@ -90,7 +72,7 @@ export const MedicalPersonnelCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/catalogue-of-services?filter=%7B"id"%3A"${data.id}"%7D`);
+        redirect(`/medical-personnel`);
         refresh();
         // notify(`Catalogue of services succesfully created!`);
   };
@@ -123,7 +105,7 @@ export const MedicalPersonnelCreate = props => {
     }, [catalogueOfServicesChoices])
 
     return (
-    <Create {...props} title='Create new catalogue of services' onSuccess={onSuccess}>
+    <Create onSuccess={onSuccess} {...props} title='Create new medical personnel' onSuccess={onSuccess}>
         <SimpleForm>             
             <TextInput source="firstName" />
             <TextInput source="surname" />

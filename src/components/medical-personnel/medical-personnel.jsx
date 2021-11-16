@@ -57,11 +57,11 @@ export const MedicalPersonnelList = props => {
 export const MedicalPersonnelEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextField source="firstName" />
-            <TextField source="surname" />
-            <TextField source="lastName" />
-            <TextField source="address" />
-            <TextField source="position" />
+            <TextInput source="firstName" />
+            <TextInput source="surname" />
+            <TextInput source="lastName" />
+            <TextInput source="address" />
+            <TextInput source="position" />
         </SimpleForm>
     </Edit>
 )
@@ -102,7 +102,7 @@ export const MedicalPersonnelCreate = props => {
     useEffect(() => {
         if(catalogueOfServicesChoices) setComplexOfServices(catalogueOfServicesChoices.map((item) => ({ id:item.id, name:item.serviceDescription })))
         if(patientsChoices) setPatients(patientsChoices.map((item) => ({ id:item.id, name:item.firstName })))
-    }, [catalogueOfServicesChoices])
+    }, [catalogueOfServicesChoices, patientsChoices])
 
     return (
     <Create onSuccess={onSuccess} {...props} title='Create new medical personnel' onSuccess={onSuccess}>

@@ -69,7 +69,7 @@ export const BrigadeMedicalPersonnelCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/brigade`);
+        redirect(`/brigade-medical-personnel`);
         refresh();
     };
 

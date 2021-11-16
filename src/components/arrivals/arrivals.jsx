@@ -69,7 +69,7 @@ export const ArrivalsCreate = props => {
     const redirect = useRedirect();
 
     const onSuccess = ({ data }) => {
-        redirect(`/brigade`);
+        redirect(`/arrivals`);
         refresh();
     };
 

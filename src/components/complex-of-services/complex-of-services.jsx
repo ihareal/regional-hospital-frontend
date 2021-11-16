@@ -98,13 +98,13 @@ export const ComplexOfServicesCreate = props => {
         resource: 'catalogue-of-services',
         payload: {
             pagination: { page: 1, perPage: 600 },
-            sort: { field: 'description', order: 'ASC' },
+            sort: { field: 'serviceDescription', order: 'ASC' },
             filter: {},
           },
     })
 
     useEffect(() => {
-        if(catalogueOfServicesChoices) setComplexOfServices(catalogueOfServicesChoices.map((item) => ({ id:item.id, name:item.description })))
+        if(catalogueOfServicesChoices) setComplexOfServices(catalogueOfServicesChoices.map((item) => ({ id:item.id, name:item.serviceDescription })))
     }, [catalogueOfServicesChoices])
 
     return (
